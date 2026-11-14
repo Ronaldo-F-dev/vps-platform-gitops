@@ -1,0 +1,10 @@
+# Jamais de secrets dans Git (stratégie complète : ADR-005, Projet 4)
+*.key
+*.pem
+.env
+kubeconfig*
+*.kubeconfig
+
+# Sorties locales
+*.retry
+.DS_Store
