@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: platform
+  labels:
+    app.kubernetes.io/part-of: vps-platform
+    platform.vps/environment: platform
+    # Outils de plateforme : on observe sans bloquer (cert-manager, puis Argo CD, Kyverno...).
+    pod-security.kubernetes.io/warn: baseline
