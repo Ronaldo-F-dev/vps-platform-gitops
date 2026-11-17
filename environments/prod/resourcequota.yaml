@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: env-quota
+spec:
+  hard:
+    requests.cpu: "1"
+    requests.memory: 768Mi
+    limits.cpu: "2"
+    limits.memory: 1536Mi
+    pods: "20"
+    persistentvolumeclaims: "5"
+    requests.storage: 20Gi
