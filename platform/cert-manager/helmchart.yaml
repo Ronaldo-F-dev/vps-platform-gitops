@@ -1,0 +1,24 @@
+# Installé par le helm-controller de K3s : le chart est épinglé et décrit dans Git.
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: cert-manager
+  namespace: kube-system
+spec:
+  repo: https://charts.jetstack.io
+  chart: cert-manager
+  version: v1.16.2
+  targetNamespace: platform
+  valuesContent: |-
+    crds:
+      enabled: true
+      keep: true
+    prometheus:
+      enabled: false
+    resources:
+      requests:
+        cpu: 20m
+        memory: 48Mi
+      limits:
+        cpu: 200m
+        memory: 128Mi
