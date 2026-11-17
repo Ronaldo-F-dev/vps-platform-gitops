@@ -19,3 +19,12 @@ check() {
     failures=$((failures + 1))
   fi
 }
+
+for env in "${envs[@]}"; do
+  # Dans son propre namespace
+  check yes list pods "$env" deployer "$env"
+  check yes create deployments "$env" deployer "$env"
+  check yes list pods "$env" viewer "$env"
+  check no  create deployments "$env" viewer "$env"
+  check no  list pods "$env" app "$env"
+done
