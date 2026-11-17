@@ -27,3 +27,15 @@ kubectl apply -f platform/cert-manager/clusterissuer-selfsigned.yaml
 kubectl apply -f platform/cert-manager/clusterissuer-letsencrypt-staging.yaml
 ```
 L'émetteur `letsencrypt-prod` n'est appliqué qu'après un certificat staging émis correctement.
+
+## 3. Application minimale et preuves
+```bash
+kubectl apply -k apps/whoami/overlays/dev
+kubectl apply -k apps/whoami/overlays/staging
+kubectl apply -k apps/whoami/overlays/prod
+kubectl get certificate -A
+scripts/verify-rbac.sh
+scripts/test-quota.sh
+scripts/test-networkpolicy.sh
+```
+Consigner les sorties dans `docs/evidence/` (daté) et mettre à jour `docs/test-log.md` de `vps-platform-infra`.
