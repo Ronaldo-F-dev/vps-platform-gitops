@@ -17,3 +17,12 @@ if probe dev np-test-dev; then
   exit 1
 fi
 echo "OK : flux dev -> prod bloqué"
+
+echo "== 2. prod -> prod : doit être AUTORISÉ (allow-same-namespace)"
+if probe prod np-test-prod; then
+  echo "OK : flux interne à prod autorisé"
+else
+  echo "ÉCHEC : le flux interne à prod est bloqué"
+  exit 1
+fi
+echo "Reste à prouver depuis l'extérieur : curl -I https://whoami.prod.<domaine> (autorisé via Traefik)"
