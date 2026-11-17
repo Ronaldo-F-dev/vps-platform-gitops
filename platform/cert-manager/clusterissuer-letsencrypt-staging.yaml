@@ -1,0 +1,16 @@
+# Émetteur de test (certificats non approuvés, quotas larges) : à utiliser avant l'émetteur de production.
+# REMPLACER l'adresse e-mail avant `kubectl apply` ; ne pas commiter d'adresse personnelle.
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: acme-contact@example.invalid
+    privateKeySecretRef:
+      name: letsencrypt-staging-account-key
+    solvers:
+      - http01:
+          ingress:
+            ingressClassName: traefik
