@@ -1,0 +1,14 @@
+# Plafond total de l'environnement. Budget capacité : applications dev+staging+prod = 3 Gi max de limites.
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: env-quota
+spec:
+  hard:
+    requests.cpu: 500m
+    requests.memory: 256Mi
+    limits.cpu: "1"
+    limits.memory: 512Mi
+    pods: "10"
+    persistentvolumeclaims: "2"
+    requests.storage: 5Gi
