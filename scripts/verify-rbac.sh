@@ -28,3 +28,19 @@ for env in "${envs[@]}"; do
   check no  create deployments "$env" viewer "$env"
   check no  list pods "$env" app "$env"
 done
+
+# Dans les AUTRES namespaces : tout doit être refusé
+for env in "${envs[@]}"; do
+  for other in "${envs[@]}"; do
+    [[ "$env" == "$other" ]] && continue
+    check no list pods "$env" deployer "$other"
+    check no create deployments "$env" deployer "$other"
+    check no list pods "$env" viewer "$other"
+  done
+done
+
+if (( failures > 0 )); then
+  echo "${failures} vérification(s) en échec"
+  exit 1
+fi
+echo "Séparation RBAC conforme"
