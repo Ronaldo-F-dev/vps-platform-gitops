@@ -7,3 +7,12 @@ via un tunnel SSH (voir `docs/k3s-access.md` de `vps-platform-infra`). Remplacé
 ```bash
 scripts/validate.sh
 ```
+
+## 1. Namespaces puis environnements
+```bash
+kubectl apply -k clusters/vps/namespaces
+kubectl apply -k environments/dev
+kubectl apply -k environments/staging
+kubectl apply -k environments/prod
+kubectl apply -f platform/namespace/limitrange.yaml
+```
