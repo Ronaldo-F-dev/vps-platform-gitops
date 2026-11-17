@@ -1,0 +1,24 @@
+# Hôte prévisible : <app>.<env>.<domaine de base> (docs/naming.md). Pour changer de domaine, modifier
+# uniquement ces trois overlays.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whoami
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+spec:
+  tls:
+    - hosts:
+        - whoami.dev.169.58.11.221.sslip.io
+      secretName: whoami-tls
+  rules:
+    - host: whoami.dev.169.58.11.221.sslip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: whoami
+                port:
+                  name: http
