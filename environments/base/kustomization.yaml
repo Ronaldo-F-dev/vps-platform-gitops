@@ -1,0 +1,7 @@
+# Base commune aux trois environnements : le namespace est imposé par chaque overlay.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - serviceaccounts.yaml
+  - rolebindings.yaml
+  - networkpolicies.yaml
