@@ -16,3 +16,14 @@ kubectl apply -k environments/staging
 kubectl apply -k environments/prod
 kubectl apply -f platform/namespace/limitrange.yaml
 ```
+
+## 2. Ingress et certificats
+```bash
+kubectl apply -f platform/traefik/helmchartconfig.yaml
+kubectl apply -f platform/cert-manager/helmchart.yaml
+kubectl -n platform rollout status deploy/cert-manager deploy/cert-manager-webhook --timeout=300s
+# Remplacer d'abord l'adresse e-mail ACME dans les deux émetteurs letsencrypt (ne pas la commiter) :
+kubectl apply -f platform/cert-manager/clusterissuer-selfsigned.yaml
+kubectl apply -f platform/cert-manager/clusterissuer-letsencrypt-staging.yaml
+```
+L'émetteur `letsencrypt-prod` n'est appliqué qu'après un certificat staging émis correctement.
