@@ -9,3 +9,10 @@ namespace (`environments/base/serviceaccounts.yaml`) et liés par RoleBinding, d
 | ServiceAccount `deployer` de l'env | edit (son env) | edit (son env) | edit (son env) | aucun | aucun |
 | ServiceAccount `viewer` de l'env | view (son env) | view (son env) | view (son env) | aucun | aucun |
 | ServiceAccount `app` de l'env | aucun | aucun | aucun | aucun | aucun |
+
+## Points d'attention
+- `edit` permet de LIRE les Secrets du namespace : le compte `deployer` est donc sensible.
+- `viewer` (`view`) ne lit pas les Secrets.
+- Argo CD (Projet 3) aura sa propre identité, décrite dans son ADR ; la CI GitHub Actions n'aura aucun
+  accès au cluster.
+- Preuve : `scripts/verify-rbac.sh` (refus de tout accès inter-namespace).
