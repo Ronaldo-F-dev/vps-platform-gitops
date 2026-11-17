@@ -18,6 +18,11 @@ spec:
         app.kubernetes.io/part-of: vps-platform
     spec:
       serviceAccountName: app
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: whoami
           image: traefik/whoami:v1.10.3
