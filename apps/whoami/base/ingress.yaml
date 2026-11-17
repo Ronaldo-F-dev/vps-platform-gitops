@@ -1,0 +1,24 @@
+# Le nom d'hôte et l'émetteur sont fournis par chaque overlay (docs/naming.md).
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whoami
+  annotations:
+    cert-manager.io/cluster-issuer: selfsigned
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - whoami.invalid
+      secretName: whoami-tls
+  rules:
+    - host: whoami.invalid
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: whoami
+                port:
+                  name: http
