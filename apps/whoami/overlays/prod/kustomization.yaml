@@ -5,3 +5,6 @@ resources:
   - ../../base
 patches:
   - path: ingress-patch.yaml
+replicas:
+  - name: whoami
+    count: 2
