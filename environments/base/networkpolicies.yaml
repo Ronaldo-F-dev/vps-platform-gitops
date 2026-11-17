@@ -1,0 +1,10 @@
+# Entrée refusée par défaut dans chaque environnement. La sortie reste ouverte (DNS, ACME, pull d'images).
+# Effectivité à prouver avec scripts/test-networkpolicy.sh (ADR-003).
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
