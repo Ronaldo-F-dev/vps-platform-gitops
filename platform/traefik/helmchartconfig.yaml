@@ -1,0 +1,15 @@
+# Traefik est livré avec K3s (ingress retenu, ADR-002). On ne le réinstalle pas : on borne sa consommation.
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 300m
+        memory: 192Mi
