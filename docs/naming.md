@@ -18,3 +18,8 @@ Forme : `<service>.<env>.<domaine de base>`. Les outils de plateforme utilisent 
 - Basculer = modifier le champ `host` des trois `apps/whoami/overlays/*/ingress-patch.yaml`, rien d'autre.
 - Risque connu : `sslip.io` est partagé par tous ses utilisateurs, donc les limites de Let's Encrypt
   peuvent être atteintes. Repli : émetteur `selfsigned`.
+
+## Labels et ressources
+- `app.kubernetes.io/name` : nom de l'application ; `app.kubernetes.io/part-of: vps-platform`.
+- `platform.vps/environment` : sur les namespaces uniquement.
+- Les ressources portent le nom de l'application (`whoami`), sans suffixe d'environnement : le namespace suffit.
