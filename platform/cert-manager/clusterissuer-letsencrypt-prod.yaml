@@ -1,0 +1,16 @@
+# Émetteur de production : seulement après validation de la chaîne avec l'émetteur staging.
+# REMPLACER l'adresse e-mail avant `kubectl apply` ; ne pas commiter d'adresse personnelle.
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: acme-contact@example.invalid
+    privateKeySecretRef:
+      name: letsencrypt-prod-account-key
+    solvers:
+      - http01:
+          ingress:
+            ingressClassName: traefik
