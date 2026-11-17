@@ -1,0 +1,16 @@
+# Le namespace platform n'a pas de quota global (les outils ont leurs propres limites, ADR-010),
+# mais aucun conteneur ne peut y tourner sans limites.
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: platform-limits
+  namespace: platform
+spec:
+  limits:
+    - type: Container
+      defaultRequest:
+        cpu: 50m
+        memory: 64Mi
+      default:
+        cpu: 300m
+        memory: 256Mi
